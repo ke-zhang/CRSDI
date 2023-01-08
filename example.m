@@ -1,10 +1,12 @@
-%Take forest as an example.
-load('data.mat');
-t=3;%time scale=3 months
-p_for=Precipitation.*repmat(land_forest,[1,1,240]);
-e_for=EVI.*repmat(land_forest,[1,1,240]);
-l_for=LST.*repmat(land_forest,[1,1,240]);
-[m,n,z] = size(p_for);
+%Take forest land as an example.
+load('data.mat')
+t=3;%time scale=3 month
+[m,n,z] = size(Precipitation);
+for i = 1:z
+    p_for(:,:,i)=Precipitation(:,:,i).*land_forest;
+    e_for(:,:,i)=EVI(:,:,i).*land_forest;
+    l_for(:,:,i)=LST(:,:,i).*land_forest;
+end
 DI_for=zeros(m,n,(z-t+1));
 for i=1:m
     for j=1:n
